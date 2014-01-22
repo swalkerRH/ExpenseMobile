@@ -34,13 +34,47 @@
 </head>
 <body>
 	<div data-role="page" id="appDiv">
-		<div data-role="panel" id="expensePanel" data-display="overlay" data-position="right">
+		<div data-role="panel" id="expensePanel" data-display="overlay" data-position="right" data-position-fixed="true">
 			<ul data-role="listview" data-inset="true">
 					<li id="expenseName" data-role="list-divider"></li>
 					<li id="expenseCost"></li>
 					<li id="expenseDate"></li>
 					<li data-role="list-divider">Actions</li>
-					<li><a href="#" class="ui-btn ui-icon-delete ui-btn-icon-right">Delete</a><li>
+					<li><a href="#" class="ui-btn ui-icon-arrow-u ui-btn-icon-right" id="expenseImageBtn">Upload Pic</a></li>
+					<li><a href="#" class="ui-btn ui-icon-delete ui-btn-icon-right" id="expenseDeleteBtn">Delete</a></li>
+					<li data-role="list-divider"></li>
+			</ul>
+		</div>
+		<div data-role="panel" id="newExpensePanel" data-display="push" data-position="left" data-position-fixed="true">
+			<ul data-role="listview" data-inset="true">
+				<li data-role="list-divider">
+					Add Expense
+				</li>
+				<li>
+					<label>
+						Description:
+					</label>
+					<input type="text" id="newExpenseDesc"/>
+				</li>
+				<li>
+					<label>
+						Cost:
+					</label>
+					<input type="text" id="newExpenseCost"/>
+				</li>
+				<li>
+					<label>
+						Category:
+					</label>
+					<fieldset data-role="controlgroup"  data-mini="true" id="newExpenseCategories">
+						<label>
+							Please Refresh Expenses
+						</label>
+					</fieldset>
+				</li>
+				<li>
+					<a href="#" class="ui-btn ui-icon-plus ui-btn-icon-right" onclick="addExpense()">Add</a>
+				</li>
 			</ul>
 		</div>
 		<div data-role="navbar" class="ui-navbar" id="navDiv">
@@ -58,9 +92,10 @@
 		<div data-role="content" id="contentDiv">
 			<div id="expensesDiv">
 				<div id="expenseList">
+				</div>
+						<a class="ui-btn ui-icon-plus ui-btn-icon-right ui-corner-all" data-icon="plus" data-iconpos="right" href="#newExpensePanel">Add Expense...</a>
 					<input type="button" id="refreshButton" value="Refresh"
 						onclick="getExpenses()" />
-				</div>
 			</div>
 			<div class="ui-body ui-corner-all ui-body-a" id="settingsDiv"
 				style="display: none;">
