@@ -58,6 +58,7 @@ function setValuesFunction(expense) {
 		$("#expenseName").text(expense.description)
 		$("#expenseCost").text("Cost: $" + Number(expense.cost).toFixed(2));
 		$("#expenseDate").text("Date: " + expense.entered);
+		$("#expenseDeleteBtn").click(function(){removeExpense(expense.id)});
 		$("#expensePanel").trigger("updatelayout");
 	}
 	return setValues;
@@ -68,6 +69,7 @@ function getExpenses() {
 		type : "POST",
 		url : appSettings.restExpenseURL,
 		data : JSON.stringify(appSettings.userJson),
+		dataType: "json",
 		contentType : "application/json",
 		mimeType : "application/json",
 		success : updateView,
@@ -114,18 +116,35 @@ function addExpense() {
 		type : "POST",
 		url : appSettings.restExpenseURL + "create/",
 		data : JSON.stringify(jsonObject),
+		dataType: "json",
 		contentType : "application/json",
 		mimeType : "application/json",
-		success : function(data) {
-			alert("Successfully added expense");
-		},
-		error : function(req, status, thrown) {
-			alert("Adding Expense Failed. Check Settings: "
-					+ req.getResponseHeader());
-		},
-		complete : function(xhr, status) {
-			alert(status);
-		}
+	}).success(function() {
+		alert("Successfully added expense");
+	}).error(function(req, status, thrown) {
+		alert("Adding Expense Failed. Check Settings: "
+				+ req.getResponseHeader());
+	}).complete(function(xhr, status) {
+		alert(status);
+	});
+	getExpenses();
+}
+
+function removeExpense(id){
+	$.ajax({
+		type : "POST",
+		url : appSettings.restExpenseURL + "remove/" + id + "/",
+		data: JSON.stringify(appSettings.userJson),
+		dataType: "json",
+		contentType : "application/json",
+		mimeType : "application/json",
+	}).success(function() {
+		alert("Successfully removed expense");
+	}).error(function(req, status, thrown) {
+		alert("Removing Expense Failed. Check Settings: "
+				+ req.getResponseHeader());
+	}).complete(function(xhr, status) {
+		alert(status);
 	});
 	getExpenses();
 }
