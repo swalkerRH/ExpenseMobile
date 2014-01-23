@@ -148,7 +148,6 @@ function addExpense() {
 	var catId = $('input[type="radio"]:checked', "#newExpenseCategories").attr(
 			"id");
 	var cat = catId.substring(catId.length - 5, -1);
-	alert(cost + " " + desc + " " + cat);
 	if (cat === "") {
 		alert("You must specify a Category");
 		return;
