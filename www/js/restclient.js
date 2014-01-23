@@ -178,6 +178,9 @@ function addExpense() {
 	}).complete(function(xhr, status) {
 		getExpenses();
 	});
+	$("#newExpenseCost").val("");
+	$("#newExpenseDesc").val("");
+	$('input[type="radio"]:checked', "#newExpenseCategories").prop("checked", "false");
 	
 }
 
