@@ -89,6 +89,7 @@
 			<ul class="ui-grid-a" id="navList">
 				<li class="ui-link ui-block-a ui-btn" id="expenseNav"><a
 					href="#"
+					class="ui-btn-active ui-state-persist"
 					onclick="$('#settingsDiv').hide();$('#expensesDiv').show();"
 					id="expenseLinkNav"> Expenses </a></li>
 				<li class="ui-link ui-block-b ui-btn" id="settingsNav"><a
@@ -122,9 +123,11 @@
 	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 	<script
 		src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
 	<script type="text/javascript" src="js/settings.js"></script>
 	<script type="text/javascript" src="js/restclient.js"></script>
 	<script type="text/javascript">
+			app.initialize();
             initSettings();
         </script>
 </body>

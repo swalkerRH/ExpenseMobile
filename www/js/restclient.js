@@ -25,6 +25,11 @@ function updateView(data) {
 			$("#" + listId).append(makeExpenseElement(expense));
 		}
 	}
+	for(var i = 0; i < categories.length; i++){
+		var listId = categories[i] + "Div";
+		var count = $("li", "#"+listId).length;
+		$("h2", "#"+listId).append('<span class="ui-li-count">'+count+'</span>');
+	}
 	$("#newExpensePanel").trigger("updatelayout");
 	$("#expenseList").trigger("create");
 }
