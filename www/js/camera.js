@@ -21,7 +21,7 @@ function cameraSetup() {
 function onPhotoDataSuccess(imageData) {
 	// Uncomment to view the base64-encoded image data
 	// console.log(imageData);
-
+	saveImage(imageData);
 	// Get image handle
 	//
 	var smallImage = document.getElementById('smallImage');

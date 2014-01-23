@@ -98,6 +98,7 @@ function setValuesFunction(expense) {
 		$("#expenseName").text(expense.description)
 		$("#expenseCost").text("Cost: $" + Number(expense.cost).toFixed(2));
 		$("#expenseDate").text("Date: " + expense.entered);
+		$("#expenseID").text(expense.id);
 		$("#expenseDeleteBtn", "#confirmDelete").click(function(){
 			removeExpense(expense.id);
 			document.getElementById("closeConfirmDeleteExpense").click();
@@ -204,6 +205,57 @@ function removeExpense(id){
 				+ req.getResponseHeader());
 	}).complete(function(xhr, status) {
 		getExpenses();
+	});
+	
+}
+
+/*needs to be in the format:
+	 * 					user: {username:username, password:password},
+	 * 					meta_data: {mime_type:mimetype, expense_id:expense_id}
+	 */
+function saveImage(imageData){
+	var mimeType = "image/jpeg";
+	var postJson = {};
+	postJson.user = appSettings.userJson;
+	postJson.meta_data = {};
+	postJson.meta_data.mime_type = "image/jpeg";
+	postJson.meta_data.expense_id = Number($("#expenseID").text());
+	
+	var putJson = {};
+	putJson.user = appSettings.userJson;
+	putJson.image = imageData;
+	
+	alert(JSON.stringify(postJson));
+	
+	
+	//post to allocate space
+	$.ajax({
+		type : "POST",
+		url : appSettings.restImageURL,
+		data: JSON.stringify(postJson),
+		dataType: "json",
+		contentType : "application/json",
+		mimeType : "application/json",
+	}).success(function(data) {
+		//put to store image
+		alert("image_data = " + JSON.stringify(putJson));
+		$.ajax({
+			type: "POST",
+			url: appSettings.restImageURL +  data.image_id + "/",
+			data: JSON.stringify(putJson),
+			dataType: "json",
+			contentType: "application/json",
+			mimeType: "application/json"
+		}).success(function() {
+			alert("Successfully uploaded image");
+		}).error(function() {
+			alert("There was an error uploading");
+		}).complete(function(jqhr, status){
+			alert("Status: " + jqhr.responseText);
+			
+		});
+	}).error( function() {
+		alert("There was a problem allocating the picture");
 	});
 	
 }
