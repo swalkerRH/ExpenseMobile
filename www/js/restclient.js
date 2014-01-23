@@ -99,7 +99,8 @@ function setValuesFunction(expense) {
 		$("#expenseCost").text("Cost: $" + Number(expense.cost).toFixed(2));
 		$("#expenseDate").text("Date: " + expense.entered);
 		$("#expenseID").text(expense.id);
-		$("#expenseDeleteBtn", "#confirmDelete").click(function(){
+		$("#expenseDeleteBtn", "#confirmDelete").off('click');
+		$("#expenseDeleteBtn", "#confirmDelete").on("click", function(){
 			removeExpense(expense.id);
 			document.getElementById("closeConfirmDeleteExpense").click();
 			});
