@@ -176,13 +176,12 @@ function addExpense() {
 		contentType : "application/json",
 		mimeType : "application/json",
 	}).success(function() {
-		alert("Successfully added expense");
-	}).complete(function(xhr, status) {
 		getExpenses();
-	});
+		alert("Successfully added expense");
+	})
 	$("#newExpenseCost").val("");
 	$("#newExpenseDesc").val("");
-	$('input[type="radio"]:checked', "#newExpenseCategories").prop("checked", "false");
+	$('input[type="radio"]:checked', "#newExpenseCategories").removeAttr("checked");
 	
 }
 
@@ -239,7 +238,6 @@ function saveImage(imageData){
 		mimeType : "application/json",
 	}).success(function(data) {
 		//put to store image
-		alert("image_data = " + JSON.stringify(putJson));
 		$.ajax({
 			type: "POST",
 			url: appSettings.restImageURL +  data.image_id + "/",
@@ -258,5 +256,6 @@ function saveImage(imageData){
 	}).error( function() {
 		alert("There was a problem allocating the picture");
 	});
+	alert("done");
 	
 }
