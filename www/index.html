@@ -44,10 +44,16 @@
 				<li><a href="#"
 					class="ui-btn ui-icon-arrow-u ui-btn-icon-right"
 					id="expenseImageBtn">Upload Pic</a></li>
-				<li><a href="#" class="ui-btn ui-icon-delete ui-btn-icon-right"
-					id="expenseDeleteBtn">Delete</a></li>
+				<li><a href="#confirmDelete" data-rel="popup" data-position-to="window" data-transition="pop"
+				 class="ui-btn ui-icon-delete ui-btn-icon-right">Delete...</a></li>
 				<li data-role="list-divider"></li>
 			</ul>
+			<div data-role="popup" id="confirmDelete" class="ui-corner-all" style="padding:10px 20px;">
+				<label>Are you sure you want to delete this expense?</label>
+				<button id="expenseDeleteBtn">Yes</button>
+				<a href="#" id="closeConfirmDeleteExpense" class="ui-btn" data-rel="back">No</a>
+			</div> 
+				
 		</div>
 		<div data-role="panel" id="newExpensePanel" data-display="push"
 			data-position="left" data-position-fixed="true">
@@ -113,16 +119,12 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="cordova.js"></script>
-	<script type="text/javascript" src="js/index.js"></script>
 	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-	<script
-		src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
 	<script
 		src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
 	<script type="text/javascript" src="js/settings.js"></script>
 	<script type="text/javascript" src="js/restclient.js"></script>
 	<script type="text/javascript">
-            app.initialize();
             initSettings();
         </script>
 </body>

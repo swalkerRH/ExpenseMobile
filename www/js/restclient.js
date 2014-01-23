@@ -93,7 +93,10 @@ function setValuesFunction(expense) {
 		$("#expenseName").text(expense.description)
 		$("#expenseCost").text("Cost: $" + Number(expense.cost).toFixed(2));
 		$("#expenseDate").text("Date: " + expense.entered);
-		$("#expenseDeleteBtn").click(function(){removeExpense(expense.id)});
+		$("#expenseDeleteBtn", "#confirmDelete").click(function(){
+			removeExpense(expense.id);
+			document.getElementById("closeConfirmDeleteExpense").click();
+			});
 		$("#expensePanel").trigger("updatelayout");
 	}
 	return setValues;

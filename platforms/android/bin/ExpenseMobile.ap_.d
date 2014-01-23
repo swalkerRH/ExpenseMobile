@@ -23,7 +23,6 @@
 /home/swalker/benchProjects/RHCDPrep/expense-mobile/platforms/android/assets/www/config.xml \
 /home/swalker/benchProjects/RHCDPrep/expense-mobile/platforms/android/assets/www/cordova_plugins.js \
 /home/swalker/benchProjects/RHCDPrep/expense-mobile/platforms/android/assets/www/img/icons-png \
-/home/swalker/benchProjects/RHCDPrep/expense-mobile/platforms/android/assets/www/img/logo.png \
 /home/swalker/benchProjects/RHCDPrep/expense-mobile/platforms/android/assets/www/img/ajax-loader.gif \
 /home/swalker/benchProjects/RHCDPrep/expense-mobile/platforms/android/assets/www/img/icons-png/arrow-d-r-white.png \
 /home/swalker/benchProjects/RHCDPrep/expense-mobile/platforms/android/assets/www/img/icons-png/star-black.png \
