@@ -47,7 +47,33 @@ function updateCategories(categories){
 }
 
 function createCategory(){
-	alert("Create a Category");
+	var catName = $("#categoryName", "#newCategoryPopup").val();
+	var catDesc = $("#categoryDesc", "#newCategoryPopup").val();
+	
+	if(catName === ""){
+		alert("Category needs a name");
+		return;
+	} if(catName === "") {
+		alert("Category needs a description");
+		return;
+	}
+	
+	var jsonObject = {};
+	jsonObject.user = appSettings.userJson;
+	jsonObject.category = {};
+	jsonObject.category.name = catName;
+	jsonObject.category.description = catDesc;
+	
+	$.ajax({
+		type : "POST",
+		url : appSettings.restCategoryURL + "create/",
+		data : JSON.stringify(jsonObject),
+		dataType: "json",
+		contentType : "application/json",
+		mimeType : "application/json",
+		success : getCategories
+	}).error(function(){alert("Error Adding Category");});
+	document.getElementById("closeNewCat").click();
 }
 
 function makeExpenseElement(expense) {
