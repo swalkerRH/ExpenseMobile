@@ -25,20 +25,29 @@ function updateView(data) {
 			$("#" + listId).append(makeExpenseElement(expense));
 		}
 	}
+	$("#newExpensePanel").trigger("updatelayout");
+	$("#expenseList").trigger("create");
+}
+
+function updateCategories(categories){
 	// display Categories in new expense
 	var newExpenseCat = $("#newExpenseCategories");
 	newExpenseCat.empty();
 	for (var j = 0; j < categories.length; j++) {
-		var cat = categories[j];
+		var cat = categories[j].name;
 		var checkHtml = '<input name="radio-choice-v-2" id="' + cat
 				+ 'Radio" type="radio"/><label for="' + cat + 'Radio">' + cat
 				+ '</label>';
 		newExpenseCat.append(checkHtml);
 	}
+	var newHtml = '<a class="ui-btn ui-icon-plus" href="#newCategoryPopup" data-rel="popup" data-position-to="window" data-transition="pop">New...</a>';
+	$("#newExpenseCategories").append(newHtml);
 	$("#newExpenseCategories").trigger("create");
 	$("#newExpenseCategories").trigger("updatelayout");
-	$("#newExpensePanel").trigger("updatelayout");
-	$("#expenseList").trigger("create");
+}
+
+function createCategory(){
+	alert("Create a Category");
 }
 
 function makeExpenseElement(expense) {
@@ -58,6 +67,7 @@ function setValuesFunction(expense) {
 		$("#expenseName").text(expense.description)
 		$("#expenseCost").text("Cost: $" + Number(expense.cost).toFixed(2));
 		$("#expenseDate").text("Date: " + expense.entered);
+		$("#expenseDeleteBtn").click(function(){removeExpense(expense.id)});
 		$("#expensePanel").trigger("updatelayout");
 	}
 	return setValues;
@@ -68,6 +78,7 @@ function getExpenses() {
 		type : "POST",
 		url : appSettings.restExpenseURL,
 		data : JSON.stringify(appSettings.userJson),
+		dataType: "json",
 		contentType : "application/json",
 		mimeType : "application/json",
 		success : updateView,
@@ -80,6 +91,18 @@ function getExpenses() {
 		},
 		traditional : true
 	});
+}
+
+function getCategories(){
+	$.ajax({
+		type : "POST",
+		url : appSettings.restCategoryURL,
+		data : JSON.stringify(appSettings.userJson),
+		dataType: "json",
+		contentType : "application/json",
+		mimeType : "application/json",
+		success : updateCategories
+	}).error(function(){alert("Error getting categories");});
 }
 /*
  * needs to be in the form of user : { username: name, password: password},
@@ -114,18 +137,37 @@ function addExpense() {
 		type : "POST",
 		url : appSettings.restExpenseURL + "create/",
 		data : JSON.stringify(jsonObject),
+		dataType: "json",
 		contentType : "application/json",
 		mimeType : "application/json",
-		success : function(data) {
-			alert("Successfully added expense");
-		},
-		error : function(req, status, thrown) {
-			alert("Adding Expense Failed. Check Settings: "
-					+ req.getResponseHeader());
-		},
-		complete : function(xhr, status) {
-			alert(status);
-		}
+	}).success(function() {
+		alert("Successfully added expense");
+	}).complete(function(xhr, status) {
+		getExpenses();
 	});
-	getExpenses();
+	
+}
+
+function removeExpense(id){
+	$.ajax({
+		type : "POST",
+		url : appSettings.restExpenseURL + "remove/" + id + "/",
+		data: JSON.stringify(appSettings.userJson),
+		dataType: "json",
+		contentType : "application/json",
+		mimeType : "application/json",
+		statusCode: {
+			401 : function(data){
+				alert("Problem Authenticating. Check Username and Password");
+			}
+		}
+	}).success(function() {
+		alert("Successfully removed expense");
+	}).error(function(req, status, thrown) {
+		alert("Removing Expense Failed. Check Settings: "
+				+ req.getResponseHeader());
+	}).complete(function(xhr, status) {
+		getExpenses();
+	});
+	
 }

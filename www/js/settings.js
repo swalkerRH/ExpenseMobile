@@ -20,6 +20,7 @@ function initSettings(){
 	appSettings.password = "employee";
 	appSettings.restExpenseURL = appSettings.restURL + "/rest/expense/";
 	appSettings.restImageURL = appSettings.restURL + "/rest/image/";
+	appSettings.restCategoryURL = appSettings.restURL + "/rest/category/"
 	constructUserJson();
 	
 	$("#URLBox").val(appSettings.restURL);
@@ -33,6 +34,7 @@ function update(){
 	appSettings.password = $("#PassBox").val();
 	appSettings.restExpenseURL = appSettings.restURL + "/rest/expense/";
 	appSettings.restImageURL = appSettings.restURL + "/rest/image/";
+	appSettings.restCategoryURL = appSettings.restURL + "/rest/category/";
 	constructUserJson();
 	
 	alert("Settings Updated");

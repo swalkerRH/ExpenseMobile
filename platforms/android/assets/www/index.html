@@ -34,49 +34,51 @@
 </head>
 <body>
 	<div data-role="page" id="appDiv">
-		<div data-role="panel" id="expensePanel" data-display="overlay" data-position="right" data-position-fixed="true">
+		<div data-role="panel" id="expensePanel" data-display="overlay"
+			data-position="right" data-position-fixed="true">
 			<ul data-role="listview" data-inset="true">
-					<li id="expenseName" data-role="list-divider"></li>
-					<li id="expenseCost"></li>
-					<li id="expenseDate"></li>
-					<li data-role="list-divider">Actions</li>
-					<li><a href="#" class="ui-btn ui-icon-arrow-u ui-btn-icon-right" id="expenseImageBtn">Upload Pic</a></li>
-					<li><a href="#" class="ui-btn ui-icon-delete ui-btn-icon-right" id="expenseDeleteBtn">Delete</a></li>
-					<li data-role="list-divider"></li>
+				<li id="expenseName" data-role="list-divider"></li>
+				<li id="expenseCost"></li>
+				<li id="expenseDate"></li>
+				<li data-role="list-divider">Actions</li>
+				<li><a href="#"
+					class="ui-btn ui-icon-arrow-u ui-btn-icon-right"
+					id="expenseImageBtn">Upload Pic</a></li>
+				<li><a href="#" class="ui-btn ui-icon-delete ui-btn-icon-right"
+					id="expenseDeleteBtn">Delete</a></li>
+				<li data-role="list-divider"></li>
 			</ul>
 		</div>
-		<div data-role="panel" id="newExpensePanel" data-display="push" data-position="left" data-position-fixed="true">
+		<div data-role="panel" id="newExpensePanel" data-display="push"
+			data-position="left" data-position-fixed="true">
 			<ul data-role="listview" data-inset="true">
-				<li data-role="list-divider">
-					Add Expense
-				</li>
-				<li>
-					<label>
-						Description:
-					</label>
-					<input type="text" id="newExpenseDesc"/>
-				</li>
-				<li>
-					<label>
-						Cost:
-					</label>
-					<input type="text" id="newExpenseCost"/>
-				</li>
-				<li>
-					<label>
-						Category:
-					</label>
-					<fieldset data-role="controlgroup"  data-mini="true" id="newExpenseCategories">
-						<label>
-							Please Refresh Expenses
-						</label>
-					</fieldset>
-				</li>
-				<li>
-					<a href="#" class="ui-btn ui-icon-plus ui-btn-icon-right" onclick="addExpense()">Add</a>
-				</li>
+				<li data-role="list-divider">Add Expense</li>
+				<li><label> Description: </label> <input type="text"
+					id="newExpenseDesc" /></li>
+				<li><label> Cost: </label> <input type="text"
+					id="newExpenseCost" /></li>
+				<li><label> Category: </label>
+					<fieldset data-role="controlgroup" data-mini="true"
+						id="newExpenseCategories">
+						<label> Please Refresh Expenses </label>
+					</fieldset></li>
+				<li><a href="#" class="ui-btn ui-icon-plus ui-btn-icon-right"
+					onclick="addExpense()">Add</a></li>
 			</ul>
+			<div data-role="popup" id="newCategoryPopup" class="ui-corner-all">
+				<form onsubmit="createCategory(); return false;">
+					<div style="padding:10px 20px;">
+						<label for="categoryName">Name:</label>
+						<input id="categoryName" type="text" />
+						<label for="categoryDesc">Description:</label>
+						<input id="categoryDesc" type="text" />
+						<input type="submit"  value="Create"/>
+						<a href="#" class="ui-btn" data-rel="back">Cancel</a>
+					</div>
+				</form>
+			</div>
 		</div>
+		
 		<div data-role="navbar" class="ui-navbar" id="navDiv">
 			<ul class="ui-grid-a" id="navList">
 				<li class="ui-link ui-block-a ui-btn" id="expenseNav"><a
@@ -91,11 +93,11 @@
 		</div>
 		<div data-role="content" id="contentDiv">
 			<div id="expensesDiv">
-				<div id="expenseList">
-				</div>
-						<a class="ui-btn ui-icon-plus ui-btn-icon-right ui-corner-all" data-icon="plus" data-iconpos="right" href="#newExpensePanel">Add Expense...</a>
-					<input type="button" id="refreshButton" value="Refresh"
-						onclick="getExpenses()" />
+				<div id="expenseList"></div>
+				<a class="ui-btn ui-icon-plus ui-btn-icon-right ui-corner-all"
+					data-icon="plus" data-iconpos="right" href="#newExpensePanel">Add
+					Expense...</a> <input type="button" id="refreshButton" value="Refresh"
+					onclick="getExpenses();getCategories();" />
 			</div>
 			<div class="ui-body ui-corner-all ui-body-a" id="settingsDiv"
 				style="display: none;">
